@@ -16,7 +16,7 @@ string `''`
 ## Output
 
 * The Numpy python-ready expression (to be copied as a string)
-* The formatted expression will be copied to your clipboard, ready to paste to Python
+* Optionally, the formatted expression can be copied to your clipboard automatically
 
 ## Installation
 
