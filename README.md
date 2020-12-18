@@ -1,4 +1,4 @@
-# ToPython
+# MathematicaToPython
 
 Mathematica package to convert [MATHEMATICA](https://www.wolfram.com/mathematica/) expressions to Python [Numpy](http://www.numpy.org/)
 
@@ -34,4 +34,4 @@ This has not been tested for every possible combinations of all the things, use 
 
 ## License
 
-[MIT](LICENSE.md) © [Gustavo Wiederhecker](https://github.com/gwiederhecker)
+[MIT](LICENSE.md) © [Gustavo Wiederhecker](https://github.com/gwiederhecker) with modifications from our group
