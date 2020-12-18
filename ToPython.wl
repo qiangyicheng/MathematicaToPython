@@ -61,6 +61,8 @@ PythonForm[Arg[a_]] := format["numpy.angle(``)", a];
 PythonForm[SphericalHarmonicY[l_, m_, a_, b_]] := format[
     "special.sph_harm(``, ``, (``) % (2 * numpy.pi), (``) % numpy.pi)",
     m, l, b, a];
+PythonForm[Gamma[a_]] := format["special.gamma(``)", a];
+PythonForm[Gamma[a_, b_]] := format["special.gamma(`1`) * special.gammaincc(`1`, `2`)", a, b];
 PythonForm[BesselI[a_, b_]] := format["special.iv(``, ``)", a, b];
 PythonForm[BesselJ[a_, b_]] := format["special.jv(``, ``)", a, b];
 PythonForm[BesselK[a_, b_]] := format["special.kn(``, ``)", a, b];
