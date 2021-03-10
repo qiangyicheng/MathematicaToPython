@@ -32,28 +32,40 @@ ToPythonEquation::usage = "ToPythonEquation[equation, numpyprefix, copy] convert
 Begin["Private`"]
 
 
+(* list of function heads that do not need to be enclosed in brackets *)
+singleFunctions={Log, Sin, Cos, Tan, Sinh, Cosh, Tanh};
+
+
 ToPython[expression_, numpyprefix_:"np", copy_:False] := Module[
-	{result, greekrule, format, PythonForm, np, a, b, l, m, args},
+	{result, greekrule, format, PythonForm, np, br, brackets, a, b, l, m, args},
 
 (* determine the correct numpy prefix *)
 If[numpyprefix=="", np=numpyprefix, np=numpyprefix<>"."];
 
 (* general function for formating output *)
-format[pattern_String, args__] := ToString @ StringForm[
-	StringReplace[pattern, "numpy."->np],
-	Sequence @@ PythonForm /@ List[args]];
+format[pattern_String, args__] := Module[{s},
+	s = StringReplace[pattern, "numpy."->np];
+	ToString @ StringForm[s, Sequence @@ PythonForm /@ List[args]]
+];
+
+(* helper function deciding when to use brackets *)
+br[a_] := If[AtomQ[a] || MemberQ[singleFunctions, Head[a]], a, brackets[a]];
+PythonForm[brackets[a_]] := format["(``)", a];
 
 (* special forms that are recognized *)
-PythonForm[Times[-1, a_]] := format["-(``)", a];
+PythonForm[Times[-1, a_]] := format["-``", br[a]];
 PythonForm[Power[a_, Rational[1, 2]]] := format["numpy.sqrt(``)", a];
-PythonForm[Times[a_, Power[b_, -1]]] := format["(``) / (``)", a, b];
+PythonForm[Times[a_, Power[b_, -1]]] := format["`` / ``", br[a], br[b]];
 
 (* Simple math *)
-PythonForm[Rational[a_, b_]] := format["(``) / (``)", a, b];
+PythonForm[Rational[a_, b_]] := format["`` / ``", br[a], br[b]];
 PythonForm[Complex[a_, b_]] := format["complex(``, ``)", a, b];
-PythonForm[Times[a_, b_]] := format["(``) * (``)", a, b];
-PythonForm[Plus[a_, b_]] := format["`` + ``", a, b];
-PythonForm[Power[a_, b_]] := format["(``) ** (``)", a, b];
+PythonForm[a_ * b__] := Module[{fs, bl={b}},
+	fs = StringRiffle[ConstantArray["``", 1 + Length@bl], " * "];
+	format[fs, br@a, Sequence @@ br /@  bl]
+];
+PythonForm[a_ + b_] := format["`` + ``", a, b];
+PythonForm[Power[a_, b_]] := format["`` ** ``", br[a], br[b]];
 PythonForm[Exp[a_]] := format["numpy.exp(``)", a];
 
 (* Some special functions *)
