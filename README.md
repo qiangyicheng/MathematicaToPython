@@ -2,22 +2,6 @@
 
 Mathematica package to convert [MATHEMATICA](https://www.wolfram.com/mathematica/) expressions to Python [Numpy](http://www.numpy.org/)
 
-## Input arguments
-
-`x`: your mathematica expression, it can be `numbers`, `literals`,
-`complexes` or `lists`;
-`numpy\[LetterSpace]prefix`: string defining your Numpy `import` prefix,
-e.g.:
-* if your used `import numpy as np`, your prefix should be the string
-`np`
-* if your used `from numpy import *`, your prefix should be the empty
-string `''`
-
-## Output
-
-* The Numpy python-ready expression (to be copied as a string)
-* Optionally, the formatted expression can be copied to your clipboard automatically
-
 ## Installation
 
 To install the package
@@ -27,6 +11,28 @@ To install the package
 3. Select the file on your disk
 
 You should be ready to go.
+
+
+## Usage
+
+The package mainly provides the `ToPython` function, which takes a Mathematica expression
+and tries to convert it to a python expression. It can handle a lot of expressions
+already, but it is obviously limited.
+
+Beside the actual expression the `ToPython` function also supports two options:
+
+* `NumpyPrefix`, which determines the name under which numpy is imported. The default is
+  to prefix all numpy call with `np.`, but you can also set `NumpyPrefix` to `"numpy"` to 
+  enforce `numpy.` as a prefix. If you supply an empty string, no prefix is added, which 
+  might be useful if you use the wildcard import `fromm numpy import *`
+* `Copy`, which when enabled copies the formatted expression to the clipboard
+
+Taken together, a simple example call is
+```
+ToPython[Sin[x], NumpyPrefix->"numpy", Copy->True]
+```
+which should copy `numpy.sin(x)` to your clipboard.
+
 
 ## Disclaimer
 

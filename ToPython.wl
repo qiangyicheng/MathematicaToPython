@@ -19,13 +19,13 @@ modifications by David Zwicker
 
 BeginPackage["ToPython`"]
 
-ToPython::usage = "ToPython[expression, numpyprefix, copy]
+ToPython::usage = "ToPython[expression, NumpyPrefix->\"np\", Copy->False]
 	converts Mathematica expression to a Numpy compatible expression. Because Numpy can
-	be imported in several ways, numpyprefix is a string that will be added to appended
-	to function names, e.g., Cos->np.cos. If copy==True, the result is copied to the clipboard"
+	be imported in several ways, you can specify the name of the numpy module using the
+    NumpyPrefix option. The additional option Copy allows you to copy the result to the clipboard"
  
-ToPythonEquation::usage = "ToPythonEquation[equation, numpyprefix, copy] converts a
-    Mathematica equation to a Numpy compatible express"
+ToPythonEquation::usage = "ToPythonEquation[equation, NumpyPrefix->\"np\", Copy->False]
+	converts a Mathematica equation to a Numpy compatible expression."
  
 
 
@@ -36,8 +36,10 @@ Begin["Private`"]
 singleFunctions={Log, Sin, Cos, Tan, Sinh, Cosh, Tanh};
 
 
-ToPython[expression_, numpyprefix_:"np", copy_:False] := Module[
-	{result, greekrule, format, PythonForm, np, br, brackets, a, b, l, m, args},
+Options[ToPython] = {NumpyPrefix->"np", Copy->False};
+ToPython[expression_, OptionsPattern[]] := Module[
+	{numpyprefix=OptionValue[NumpyPrefix], copy=OptionValue[Copy],
+	result, greekrule, format, PythonForm, np, br, brackets, a, b, l, m, args},
 
 (* determine the correct numpy prefix *)
 If[numpyprefix=="", np=numpyprefix, np=numpyprefix<>"."];
@@ -128,7 +130,8 @@ result
 ]
 
 
-ToPythonEquation[Equal[a_, b_], numpyprefix_:"np", copy_:True] := ToPython[a - b, numpyprefix, copy]
+Options[ToPythonEquation] = {NumpyPrefix->"np", Copy->False};
+ToPythonEquation[Equal[a_, b_], opts : OptionsPattern[]] := ToPython[a - b, opts]
 
 
 End[]
