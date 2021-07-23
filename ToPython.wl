@@ -77,6 +77,14 @@ PythonForm[SphericalHarmonicY[l_, m_, a_, b_]] := format[
     m, l, b, a];
 PythonForm[Gamma[a_]] := format["special.gamma(``)", a];
 PythonForm[Gamma[a_, b_]] := format["special.gamma(`1`) * special.gammaincc(`1`, `2`)", a, b];
+PythonForm[BesselI[0, b_]] := format["special.i0(``)", b];
+PythonForm[BesselJ[0, b_]] := format["special.j0(``)", b];
+PythonForm[BesselK[0, b_]] := format["special.k0(``)", b];
+PythonForm[BesselY[0, b_]] := format["special.y0(``)", b];
+PythonForm[BesselI[1, b_]] := format["special.i1(``)", b];
+PythonForm[BesselJ[1, b_]] := format["special.j1(``)", b];
+PythonForm[BesselK[1, b_]] := format["special.k1(``)", b];
+PythonForm[BesselY[1, b_]] := format["special.y1\(``)", b];
 PythonForm[BesselI[a_, b_]] := format["special.iv(``, ``)", a, b];
 PythonForm[BesselJ[a_, b_]] := format["special.jv(``, ``)", a, b];
 PythonForm[BesselK[a_, b_]] := format["special.kn(``, ``)", a, b];
