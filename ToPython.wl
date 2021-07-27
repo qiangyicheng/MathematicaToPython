@@ -59,6 +59,10 @@ PythonForm[Times[-1, a_]] := format["-``", br[a]];
 PythonForm[Power[a_, Rational[1, 2]]] := format["numpy.sqrt(``)", a];
 PythonForm[Times[a_, Power[b_, -1]]] := format["`` / ``", br[a], br[b]];
 
+(* special forms that are not supported *)
+ToPython::hasDerivative="Dervatives are not supported";
+PythonForm[Derivative[___]] := (Message[ToPython::hasDerivative]; Abort[]);
+
 (* Simple math *)
 PythonForm[Rational[a_, b_]] := format["`` / ``", br[a], br[b]];
 PythonForm[Complex[a_, b_]] := format["complex(``, ``)", a, b];
