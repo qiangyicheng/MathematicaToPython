@@ -64,7 +64,8 @@ ToPython::hasDerivative="Dervatives are not supported";
 PythonForm[Derivative[___]] := (Message[ToPython::hasDerivative]; Abort[]);
 
 (* Simple math *)
-PythonForm[Rational[a_, b_]] := format["`` / ``", br[a], br[b]];
+PythonForm[Rational[a_, b_]] := ToString[N[a/b, $MachinePrecision], FortranForm];
+PythonForm[a_Rational] := ToString[N[a, $MachinePrecision], FortranForm];
 PythonForm[Complex[a_, b_]] := format["complex(``, ``)", a, b];
 PythonForm[a_ * b__] := Module[{fs, bl={b}},
 	fs = StringRiffle[ConstantArray["``", 1 + Length@bl], " * "];
