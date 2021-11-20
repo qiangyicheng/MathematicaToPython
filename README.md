@@ -24,7 +24,7 @@ Beside the actual expression the `ToPython` function also supports two options:
 * `NumpyPrefix`, which determines the name under which numpy is imported. The default is
   to prefix all numpy call with `np.`, but you can also set `NumpyPrefix` to `"numpy"` to 
   enforce `numpy.` as a prefix. If you supply an empty string, no prefix is added, which 
-  might be useful if you use the wildcard import `fromm numpy import *`
+  might be useful if you use the wildcard import `from numpy import *`
 * `Copy`, which when enabled copies the formatted expression to the clipboard
 
 Taken together, a simple example call is

@@ -75,6 +75,10 @@ PythonForm[a_ + b_] := format["`` + ``", a, b];
 PythonForm[Power[a_, b_]] := format["`` ** ``", br[a], br[b]];
 PythonForm[Exp[a_]] := format["numpy.exp(``)", a];
 
+(* Some basic functions *)
+PythonForm[Max[a_, b_]] := format["numpy.maximum(`1`, `2`)", a, b];
+PythonForm[Min[a_, b_]] := format["numpy.minimum(`1`, `2`)", a, b];
+
 (* Some special functions *)
 PythonForm[Arg[a_]] := format["numpy.angle(``)", a];
 PythonForm[SphericalHarmonicY[l_, m_, a_, b_]] := format[
