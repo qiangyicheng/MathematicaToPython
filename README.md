@@ -2,11 +2,20 @@
 
 Mathematica package to convert [MATHEMATICA](https://www.wolfram.com/mathematica/) expressions to Python [Numpy](http://www.numpy.org/)
 
+## Quick usage
+
+The quickest way to use the package is to directly load it from the master branch of this
+repository by running the following code in a Mathematica notebook:
+
+```Mathematica
+Import["https://raw.githubusercontent.com/zwicker-group/MathematicaToPython/master/ToPython.wl"]
+```
+
 ## Installation
 
-To install the package
+To install the package permanently, do the following
 
-1. Download it
+1. Download it from this repository
 2. Click on `Mathematica`' `File menu-> Install->From file...`
 3. Select the file on your disk
 
@@ -28,7 +37,7 @@ Beside the actual expression the `ToPython` function also supports two options:
 * `Copy`, which when enabled copies the formatted expression to the clipboard
 
 Taken together, a simple example call is
-```
+```Mathematica
 ToPython[Sin[x], NumpyPrefix->"numpy", Copy->True]
 ```
 which should copy `numpy.sin(x)` to your clipboard.
