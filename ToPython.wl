@@ -21,9 +21,13 @@ BeginPackage["ToPython`"]
 ToPython::usage = "ToPython[expression, NumpyPrefix->\"np\", Copy->False]
     converts Mathematica expression to a Numpy compatible expression. Because Numpy can
     be imported in several ways, you can specify the name of the numpy module using the
+    converts Mathematica expression to a Numpy compatible expression. Because Numpy can
+    be imported in several ways, you can specify the name of the numpy module using the
     NumpyPrefix option. The additional option Copy allows you to copy the result to the clipboard"
 
+
 ToPythonEquation::usage = "ToPythonEquation[equation, NumpyPrefix->\"np\", Copy->False]
+    converts a Mathematica equation to a Numpy compatible expression."
     converts a Mathematica equation to a Numpy compatible expression."
 
 Begin["Private`"]
@@ -139,7 +143,7 @@ ToPython[expression_, OptionsPattern[]] :=
              -> "gamma", "\[Delta]" -> "delta", "\[Epsilon]" -> "epsilon", "\[CurlyEpsilon]"
              -> "curlyepsilon", "\[Zeta]" -> "zeta", "\[Eta]" -> "eta", "\[Theta]"
              -> "theta", "\[Iota]" -> "iota", "\[Kappa]" -> "kappa", "\[Lambda]" 
-            -> "lambda", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
+            -> "lamb", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
              -> "omicron", "\[Pi]" -> "pi", "\[Rho]" -> "rho", "\[FinalSigma]" ->
              "finalsigma", "\[Sigma]" -> "sigma", "\[Tau]" -> "tau", "\[Upsilon]"
              -> "upsilon", "\[CurlyPhi]" -> "curlyphi", "\[Chi]" -> "chi", "\[Phi]"
@@ -154,12 +158,14 @@ ToPython[expression_, OptionsPattern[]] :=
              -> "Tau", "\[CapitalUpsilon]" -> "Upsilon", "\[CapitalPhi]" -> "CurlyPhi",
              "\[CapitalChi]" -> "Chi", "\[CapitalPsi]" -> "Psi", "\[CapitalOmega]"
              -> "Omega"};
+        plusminusrule = {"+ -" -> "-"};
         (* Everything else *)
         PythonForm[h_[args__]] := np <> ToLowerCase[PythonForm[h]] <>
              "(" <> PythonForm[args] <> ")";
         PythonForm[allOther_] := StringReplace[ToString[allOther, FortranForm
             ], greekrule];
-        result = StringReplace[PythonForm[expression], greekrule];
+        result = StringReplace[PythonForm[expression], greekrule ~ Join
+             ~ plusminusrule];
         (* Copy results to clipboard *)
         If[copy,
             CopyToClipboard[result]
@@ -168,10 +174,14 @@ ToPython[expression_, OptionsPattern[]] :=
     ]
 
 Options[ToPythonEquation] = {NumpyPrefix -> "np", Copy -> False};
+Options[ToPythonEquation] = {NumpyPrefix -> "np", Copy -> False};
 
+ToPythonEquation[Equal[a_, b_], opts : OptionsPattern[]] :=
+    ToPython[a - b, opts]
 ToPythonEquation[Equal[a_, b_], opts : OptionsPattern[]] :=
     ToPython[a - b, opts]
 
 End[]
+
 
 EndPackage[]
