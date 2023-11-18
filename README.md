@@ -21,7 +21,6 @@ To install the package permanently, do the following
 
 You should be ready to go.
 
-
 ## Usage
 
 The package mainly provides the `ToPython` function, which takes a Mathematica expression
@@ -31,17 +30,18 @@ already, but it is obviously limited.
 Beside the actual expression the `ToPython` function also supports two options:
 
 * `NumpyPrefix`, which determines the name under which numpy is imported. The default is
-  to prefix all numpy call with `np.`, but you can also set `NumpyPrefix` to `"numpy"` to 
-  enforce `numpy.` as a prefix. If you supply an empty string, no prefix is added, which 
+  to prefix all numpy call with `np.`, but you can also set `NumpyPrefix` to `"numpy"` to
+  enforce `numpy.` as a prefix. If you supply an empty string, no prefix is added, which
   might be useful if you use the wildcard import `from numpy import *`
 * `Copy`, which when enabled copies the formatted expression to the clipboard
 
 Taken together, a simple example call is
+
 ```Mathematica
 ToPython[Sin[x], NumpyPrefix->"numpy", Copy->True]
 ```
-which should copy `numpy.sin(x)` to your clipboard.
 
+which should copy `numpy.sin(x)` to your clipboard.
 
 ## Disclaimer
 
