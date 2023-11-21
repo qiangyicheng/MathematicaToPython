@@ -21,13 +21,9 @@ BeginPackage["ToPython`"]
 ToPython::usage = "ToPython[expression, NumpyPrefix->\"np\", Copy->False]
     converts Mathematica expression to a Numpy compatible expression. Because Numpy can
     be imported in several ways, you can specify the name of the numpy module using the
-    converts Mathematica expression to a Numpy compatible expression. Because Numpy can
-    be imported in several ways, you can specify the name of the numpy module using the
     NumpyPrefix option. The additional option Copy allows you to copy the result to the clipboard"
 
-
 ToPythonEquation::usage = "ToPythonEquation[equation, NumpyPrefix->\"np\", Copy->False]
-    converts a Mathematica equation to a Numpy compatible expression."
     converts a Mathematica equation to a Numpy compatible expression."
 
 Begin["Private`"]
@@ -174,14 +170,10 @@ ToPython[expression_, OptionsPattern[]] :=
     ]
 
 Options[ToPythonEquation] = {NumpyPrefix -> "np", Copy -> False};
-Options[ToPythonEquation] = {NumpyPrefix -> "np", Copy -> False};
 
-ToPythonEquation[Equal[a_, b_], opts : OptionsPattern[]] :=
-    ToPython[a - b, opts]
 ToPythonEquation[Equal[a_, b_], opts : OptionsPattern[]] :=
     ToPython[a - b, opts]
 
 End[]
-
 
 EndPackage[]
