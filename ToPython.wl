@@ -134,12 +134,13 @@ ToPython[expression_, OptionsPattern[]] :=
         (* Constants *)
         PythonForm[\[Pi]] = np <> "pi";
         PythonForm[E] = np <> "e";
+        PythonForm[a_,b__] := PythonForm[a]<>","<>PythonForm[b];
         (* Greek characters *)
         greekrule = {"\[Alpha]" -> "alpha", "\[Beta]" -> "beta", "\[Gamma]"
              -> "gamma", "\[Delta]" -> "delta", "\[Epsilon]" -> "epsilon", "\[CurlyEpsilon]"
              -> "curlyepsilon", "\[Zeta]" -> "zeta", "\[Eta]" -> "eta", "\[Theta]"
              -> "theta", "\[Iota]" -> "iota", "\[Kappa]" -> "kappa", "\[Lambda]" 
-            -> "lamb", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
+            -> "lambda", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
              -> "omicron", "\[Pi]" -> "pi", "\[Rho]" -> "rho", "\[FinalSigma]" ->
              "finalsigma", "\[Sigma]" -> "sigma", "\[Tau]" -> "tau", "\[Upsilon]"
              -> "upsilon", "\[CurlyPhi]" -> "curlyphi", "\[Chi]" -> "chi", "\[Phi]"
