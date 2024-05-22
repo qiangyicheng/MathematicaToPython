@@ -140,7 +140,7 @@ ToPython[expression_, OptionsPattern[]] :=
              -> "gamma", "\[Delta]" -> "delta", "\[Epsilon]" -> "epsilon", "\[CurlyEpsilon]"
              -> "curlyepsilon", "\[Zeta]" -> "zeta", "\[Eta]" -> "eta", "\[Theta]"
              -> "theta", "\[Iota]" -> "iota", "\[Kappa]" -> "kappa", "\[Lambda]" 
-            -> "lambda", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
+            -> "lamb", "\[Mu]" -> "mu", "\[Nu]" -> "nu", "\[Xi]" -> "xi", "\[Omicron]"
              -> "omicron", "\[Pi]" -> "pi", "\[Rho]" -> "rho", "\[FinalSigma]" ->
              "finalsigma", "\[Sigma]" -> "sigma", "\[Tau]" -> "tau", "\[Upsilon]"
              -> "upsilon", "\[CurlyPhi]" -> "curlyphi", "\[Chi]" -> "chi", "\[Phi]"
